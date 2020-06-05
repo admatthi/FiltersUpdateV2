@@ -173,8 +173,6 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
 
             var intdayofweek = Int()
 
-           
-
             @IBOutlet var darklabel: UILabel!
 
             func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -218,6 +216,7 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
             var mycolors = [UIColor]()
 
         @IBOutlet weak var backimage: UIImageView!
+    
         override func viewDidLoad() {
                 super.viewDidLoad()
 
@@ -374,56 +373,128 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
                 // Do any additional setup after loading the view.
             }
 
-            @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
 
-                if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            if let swipeGesture = gesture as? UISwipeGestureRecognizer {
 
-                    switch swipeGesture.direction {
-                    case UISwipeGestureRecognizer.Direction.right:
+                switch swipeGesture.direction {
+                case UISwipeGestureRecognizer.Direction.right:
 
-                        if selectedindex > 0 {
+                    if selectedindex > 0 {
 
-                            selectedindex = selectedindex - 1
+                        selectedindex = selectedindex - 1
 
-                            selectedgenre = genres[selectedindex]
+                        selectedgenre = genres[selectedindex]
 
-                            
+                        
 
-                            queryforids { () -> Void in
-
-                            }
-
-                            genreCollectionView.reloadData()
+                        queryforids { () -> Void in
 
                         }
 
-                    case UISwipeGestureRecognizer.Direction.down:
-                        break
-                    case UISwipeGestureRecognizer.Direction.left:
+                        genreCollectionView.reloadData()
 
-                        if selectedindex < 3 {
-
-                            selectedindex = selectedindex + 1
-
-                            selectedgenre = genres[selectedindex]
-
-
-                            queryforids { () -> Void in
-
-                            }
-
-
-                            genreCollectionView.reloadData()
-
-                        }
-                    case UISwipeGestureRecognizer.Direction.up:
-                        break
-                    default:
-                        break
                     }
+
+                case UISwipeGestureRecognizer.Direction.down:
+                    break
+                case UISwipeGestureRecognizer.Direction.left:
+
+                    if selectedindex < 3 {
+
+                        selectedindex = selectedindex + 1
+
+                        selectedgenre = genres[selectedindex]
+
+
+                        queryforids { () -> Void in
+
+                        }
+
+
+                        genreCollectionView.reloadData()
+
+                    }
+                case UISwipeGestureRecognizer.Direction.up:
+                    break
+                default:
+                    break
                 }
             }
+        }
 
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    
+    func downloadImage(from url: URL){
+        print("Download Started")
+        getData(from: url) { data, response, error in
+            guard let _ = data, error == nil else { return }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            //let ab = url.absoluteString
+            
+            print("Download Finished", url.lastPathComponent)
+            
+            let Url = url.absoluteURL
+            
+
+            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            
+            let fileURL = documentsURL.appendingPathComponent("\(url.lastPathComponent)")
+            
+            var assetObj:PHFetchResult<PHAsset>!
+            
+            DispatchQueue.global(qos: .userInitiated).async {
+                let options = PHFetchOptions()
+                options.sortDescriptors = [NSSortDescriptor.init(key: "creationDate", ascending: false)]
+                options.predicate = NSPredicate(format: "mediaType = %d || mediaType = %d", PHAssetMediaType.image.rawValue, PHAssetMediaType.video.rawValue)
+                options.includeAllBurstAssets = false
+                
+                let fetchResults = PHAsset.fetchAssets(with: options)
+                DispatchQueue.main.async {
+                    assetObj = fetchResults
+                    print("Loaded \(fetchResults.count) images.")
+                    
+                    if(assetObj != nil){
+                        let temporaryDNGFileURL = Url
+                        
+                        let options = PHImageRequestOptions()
+                        
+                        options.isSynchronous = false
+                        options.version = .current
+                        options.deliveryMode = .opportunistic
+                        options.resizeMode = .none
+                        options.isNetworkAccessAllowed = false
+                        
+                        guard assetObj.count > 0 else { return }
+                        PHImageManager.default().requestImageData(for: assetObj.lastObject!, options: options, resultHandler: {
+                            imageData, dataUTI, imageOrientation, info in
+                            
+                            let assetURL = temporaryDNGFileURL
+                            _ = assetURL.pathExtension
+                            
+                            
+                            try? imageData?.write(to: fileURL)
+                            
+                        })
+                        
+                        let shareAll = [fileURL] as [Any]
+                        
+                        let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
+                        
+                        activityViewController.popoverPresentationController?.sourceView = self.view
+                        self.present(activityViewController, animated: true, completion: nil)
+                    }
+                    
+                }
+            }
+            
+            
+        }
+        
+    }
         
         var genreindex = Int()
             var text = String()
@@ -580,7 +651,7 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
             }
 
             func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+                
                 refer = "On Tap Discover"
 
                 let generator = UIImpactFeedbackGenerator(style: .heavy)
@@ -597,8 +668,8 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
                     collectionView.alpha = 0
 
                     selectedgenre = genres[indexPath.row]
-
-
+                    
+                    
                     genreindex = indexPath.row
 
                     queryforids { () -> Void in
@@ -614,6 +685,7 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
 
                     let book = self.book(atIndexPath: indexPath)
                     
+                    //print("CELL ITEM===>", book ?? [])
                     
                     headlines.removeAll()
                     
@@ -656,63 +728,12 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
                                     let imgName = "Summer1"
                                     path = resourcePath + "/" + imgName
                                 }
-                                let imageFileName = "Summer1"
                                 
-                                if let audioFilePath = Bundle.main.path(forResource: imageFileName, ofType: "dng", inDirectory: nil) {
-                                    print(audioFilePath)
-                                    path = audioFilePath;
-                                }
+                                let file = NSURL(string: selecteddownload);
                                 
-                                
-                                
-                                var assetObj:PHFetchResult<PHAsset>!
-                                
-                                DispatchQueue.global(qos: .userInitiated).async {
-                                    let options = PHFetchOptions()
-                                    options.sortDescriptors = [NSSortDescriptor.init(key: "creationDate", ascending: false)]
-                                    options.predicate = NSPredicate(format: "mediaType = %d || mediaType = %d", PHAssetMediaType.image.rawValue, PHAssetMediaType.video.rawValue)
-                                    options.includeAllBurstAssets = false
-                                    let fetchResults = PHAsset.fetchAssets(with: options)
-                                    DispatchQueue.main.async {
-                                        assetObj = fetchResults
-                                        print("Loaded \(fetchResults.count) images.")
-                                        
-                                        if(assetObj != nil){
-                                            let temporaryDNGFileURL = URL(fileURLWithPath: path)
-                                            
-                                            let options = PHImageRequestOptions()
-                                            
-                                            options.isSynchronous = false
-                                            options.version = .current
-                                            options.deliveryMode = .opportunistic
-                                            options.resizeMode = .none
-                                            options.isNetworkAccessAllowed = false
-                                            
-                                            guard assetObj.count > 0 else { return }
-                                            PHImageManager.default().requestImageData(for: assetObj.lastObject!, options: options, resultHandler: {
-                                                imageData, dataUTI, imageOrientation, info in
-                                                
-                                                let assetURL = temporaryDNGFileURL
-                                                _ = assetURL.pathExtension
-                                                
-                                                try? imageData?.write(to: temporaryDNGFileURL)
-                                                
-                                            })
-                                            
-                                            let shareAll = [temporaryDNGFileURL] as [Any]
-                                            
-                                            let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
-                                            
-                                            activityViewController.popoverPresentationController?.sourceView = self.view
-                                            self.present(activityViewController, animated: true, completion: nil)
-                                        }
-                                        
-                                    }
-                                }
-                                
+                                downloadImage(from:file! as URL)
                             } else {
-                                
-                                self.performSegue(withIdentifier: "FDiscoverToSale", sender: self)
+                                 self.performSegue(withIdentifier: "FDiscoverToSale", sender: self)
                                 
                             }
                             
@@ -1050,10 +1071,6 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
              // Pass the selected object to the new view controller.
              }
              */
-
-            
-
-        
 
         }
 
