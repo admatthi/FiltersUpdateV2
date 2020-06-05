@@ -435,6 +435,9 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
             print(response?.suggestedFilename ?? url.lastPathComponent)
             //let ab = url.absoluteString
             
+           // let image : UIImage = UIImage(data: data!)!
+            
+                
             print("Download Finished", url.lastPathComponent)
             
             let Url = url.absoluteURL
@@ -444,13 +447,22 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
             
             let fileURL = documentsURL.appendingPathComponent("\(url.lastPathComponent)")
             
+            do {
+                try data?.write(to: fileURL, options: [])
+                        } catch {
+                            print("Unable to write DNG file.")
+                            return
+                        }
+            
             var assetObj:PHFetchResult<PHAsset>!
             
             DispatchQueue.global(qos: .userInitiated).async {
                 let options = PHFetchOptions()
                 options.sortDescriptors = [NSSortDescriptor.init(key: "creationDate", ascending: false)]
-                options.predicate = NSPredicate(format: "mediaType = %d || mediaType = %d", PHAssetMediaType.image.rawValue, PHAssetMediaType.video.rawValue)
+                options.predicate = NSPredicate(format: "mediaType = %d || mediaType = %d || mediaType = %d", PHAssetMediaType.image.rawValue, PHAssetMediaType.video.rawValue,
+                                                PHAssetMediaType.unknown.rawValue)
                 options.includeAllBurstAssets = false
+                
                 
                 let fetchResults = PHAsset.fetchAssets(with: options)
                 DispatchQueue.main.async {
