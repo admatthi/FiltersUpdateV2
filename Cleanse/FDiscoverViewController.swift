@@ -11,6 +11,8 @@ import Firebase
 import FirebaseCore
 import FirebaseDatabase
 import Kingfisher
+import Kingfisher
+import Photos
 
 var selectedbeforeimage = String()
 var selectedafterimage = String()
@@ -94,14 +96,14 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
                         
                     } else {
                                      
-                        didpurchase = false
+                        didpurchase = true
                         self.performSegue(withIdentifier: "FDiscoverToSale", sender: self)
                         
                     }
                     
                 } else {
                     
-                    didpurchase = false
+                    didpurchase = true
                   self.performSegue(withIdentifier: "FDiscoverToSale", sender: self)
                 }
          
@@ -643,42 +645,80 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
                     
                     headlines = headlines.filter{$0 != "x"}
 
-                    let alert = UIAlertController(title: "What would you like to do?", message: "", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Read", style: .default, handler: { action in
-                          switch action.style{
-                          case .default:
-                                print("default")
-
+                 
+                                                
+                            if didpurchase {
+                                
+                                
+                                var path = String()
+                                //
+                                if let resourcePath = Bundle.main.resourcePath {
+                                    let imgName = "Summer1"
+                                    path = resourcePath + "/" + imgName
+                                }
+                                let imageFileName = "Summer1"
+                                
+                                if let audioFilePath = Bundle.main.path(forResource: imageFileName, ofType: "dng", inDirectory: nil) {
+                                    print(audioFilePath)
+                                    path = audioFilePath;
+                                }
+                                
+                                
+                                
+                                var assetObj:PHFetchResult<PHAsset>!
+                                
+                                DispatchQueue.global(qos: .userInitiated).async {
+                                    let options = PHFetchOptions()
+                                    options.sortDescriptors = [NSSortDescriptor.init(key: "creationDate", ascending: false)]
+                                    options.predicate = NSPredicate(format: "mediaType = %d || mediaType = %d", PHAssetMediaType.image.rawValue, PHAssetMediaType.video.rawValue)
+                                    options.includeAllBurstAssets = false
+                                    let fetchResults = PHAsset.fetchAssets(with: options)
+                                    DispatchQueue.main.async {
+                                        assetObj = fetchResults
+                                        print("Loaded \(fetchResults.count) images.")
+                                        
+                                        if(assetObj != nil){
+                                            let temporaryDNGFileURL = URL(fileURLWithPath: path)
+                                            
+                                            let options = PHImageRequestOptions()
+                                            
+                                            options.isSynchronous = false
+                                            options.version = .current
+                                            options.deliveryMode = .opportunistic
+                                            options.resizeMode = .none
+                                            options.isNetworkAccessAllowed = false
+                                            
+                                            guard assetObj.count > 0 else { return }
+                                            PHImageManager.default().requestImageData(for: assetObj.lastObject!, options: options, resultHandler: {
+                                                imageData, dataUTI, imageOrientation, info in
+                                                
+                                                let assetURL = temporaryDNGFileURL
+                                                _ = assetURL.pathExtension
+                                                
+                                                try? imageData?.write(to: temporaryDNGFileURL)
+                                                
+                                            })
+                                            
+                                            let shareAll = [temporaryDNGFileURL] as [Any]
+                                            
+                                            let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
+                                            
+                                            activityViewController.popoverPresentationController?.sourceView = self.view
+                                            self.present(activityViewController, animated: true, completion: nil)
+                                        }
+                                        
+                                    }
+                                }
+                                
+                            } else {
+                                
+                                self.performSegue(withIdentifier: "FDiscoverToSale", sender: self)
+                                
+                            }
                             
-                          case .cancel:
-                                print("cancel")
-
-                          case .destructive:
-                                print("destructive")
-
-
-                    }}))
-                    alert.addAction(UIAlertAction(title: "Listen", style: .default, handler: { action in
-                                   switch action.style{
-                                   case .default:
-                                         print("default")
-
-                                         self.performSegue(withIdentifier: "HomeToListen", sender: self)
-                                   case .cancel:
-                                         print("cancel")
-
-                                   case .destructive:
-                                         print("destructive")
-
-
-                             }}))
-                    
-                    
-                        self.performSegue(withIdentifier: "DiscoverToFilterOverview", sender: self)
+                        }
 
                  
-                }
-
 
             }
 

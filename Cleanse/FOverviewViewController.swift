@@ -26,185 +26,26 @@ class FOverviewViewController: UIViewController {
 
  
     
-        @IBAction func tapStart(_ sender: Any) {
+    @IBAction func tapStart(_ sender: Any) {
+        
+        if didpurchase {
             
-//            if didpurchase {
-//
-//                self.performSegue(withIdentifier: "FilterOverviewToSale", sender: self)
-//
-//            } else {
-            
-//            var yourImageURLString = UIImage(named: "Summer1")
-
-//           let dngFileURL = URL(string: yourImageURLString)
-//
-//                let dngData = photo.fileDataRepresentation()!
-//                do {
-//                    try dngData.write(to: dngFileURL, options: [])
-//                } catch {
-//                    print("Unable to write DNG file.")
-//                    return
-//                }
-//
-//  PHPhotoLibrary.shared().performChanges({
-//                    // Add the compressed (HEIF) data as the main resource for the Photos asset.
-//                    let creationRequest = PHAssetCreationRequest.forAsset()
-//                    creationRequest.addResource(with: .photo, data: compressedData, options: nil)
-//
-//                    // Add the RAW (DNG) file as an altenate resource.
-//                    let options = PHAssetResourceCreationOptions()
-//                    options.shouldMoveFile = true
-//                    creationRequest.addResource(with: .alternatePhoto, fileURL: rawURL, options: options)
-//                }, completionHandler: self.handlePhotoLibraryError)
-//
-//
-//                //
-//                //                             let myWebsite = NSURL(string: "https://motivationapp.page.link/share")
-//
-//                guard let yourImageURL = URL(string: yourImageURLString) else { return }
-//
-//                getDataFromUrl(url: yourImageURL) { (data, response, error) in
-//
-//                    guard let data = data, let imageFromData = UIImage(data: data) else { return }
-//
-//                    DispatchQueue.main.async() {
-//                        UIImageWriteToSavedPhotosAlbum(imageFromData, nil, nil, nil)
-//
-//                        let alert = UIAlertController(title: "Saved", message: "Your image has been saved", preferredStyle: .alert)
-//                        let okAction = UIAlertAction(title: "Ok", style: .default)
-//                        alert.addAction(okAction)
-//                        self.present(alert, animated: true)
-//                    }
-//                }
-            
-//            var photo = UIImage(named: "Summer1").da
-//
-//            let dir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as String
-//            let formatter = DateFormatter()
-//            formatter.dateFormat = "yyyyMMddHHmmss"
-//            formatter.locale = Locale.init(identifier: "en_US_POSIX")
-//            let filePath =  dir.appending(String(format: "/%@.dng", formatter.string(from: Date())))
-//            let dngFileURL = URL(fileURLWithPath: filePath)
-//
-//            let dngData = photo.fileDataRepresentation()!
-//            do {
-//                try dngData.write(to: dngFileURL, options: [])
-//            } catch {
-//                print("Unable to write DNG file.")
-//                return
-//            }
-//
-//            PHPhotoLibrary.shared().performChanges({
-//                // Add the compressed (HEIF) data as the main resource for the Photos asset.
-//                let creationRequest = PHAssetCreationRequest.forAsset()
-//                creationRequest.addResource(with: .photo, data: compressedData, options: nil)
-//
-//                // Add the RAW (DNG) file as an altenate resource.
-//                let options = PHAssetResourceCreationOptions()
-//                options.shouldMoveFile = true
-//                creationRequest.addResource(with: .alternatePhoto, fileURL: rawURL, options: options)
-//            }, completionHandler: nil)
-    
-//            var image =  UIImage(named: "Summer1")
-         //
-         //                             let myWebsite = NSURL(string: "https://motivationapp.page.link/share")
-         
-//         let shareAll : Array = [image] as [Any]
-//
-//
-//         let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
-//
-//         activityViewController.excludedActivityTypes = [UIActivity.ActivityType.print, UIActivity.ActivityType.postToWeibo, UIActivity.ActivityType.addToReadingList, UIActivity.ActivityType.postToVimeo, UIActivity.ActivityType.saveToCameraRoll, UIActivity.ActivityType.assignToContact]
-//
-//         activityViewController.popoverPresentationController?.sourceView = self.view
-//         self.present(activityViewController, animated: true, completion: nil)
-
-//            }
-            
-//            var downloadimage = UIImage(named: "Summer1")!
-            
-            
-//            var activityItems = [Array<Any>]()
-//
-//            if let resourcePath = Bundle.main.resourcePath {
-//                let imgName = "Summer1"
-//                let path = resourcePath + "/" + imgName
-//            }
-//
-////            let asset = assetsFetchResults[Int(image_number)] as? PHAsset
-//
-//            let asset = PHAsset.fetchAssets(withLocalIdentifiers: "Summer1", options: <#T##PHFetchOptions?#>)
-//
-//            let options = PHImageRequestOptions()
-//            options.isSynchronous = false
-////            options.version() = PHImageRequestOptionsVersion.current.rawValue
-//            options.deliveryMode = .opportunistic
-//            options.resizeMode = .none
-//            options.isNetworkAccessAllowed = false //HAS TO BE YES TO DOWNLOAD FROM THE CLOUD AND PROGRESS TO SHOW
-//            /*options.progressHandler =  ^(double progress,NSError *error,BOOL* stop, NSDictionary* dict) {
-//                NSLog(@"progress %lf",progress);  //never gets called
-//            };*/
-//
-//            PHImageManager.default().requestImageData(for: asset, options: options, resultHandler: { imageData, dataUTI, imageOrientation, info in
-//
-//                let assetURL = info?["PHImageFileURLKey"] as? URL
-//                let photoFormat = assetURL?.pathExtension
-//
-//                var temporaryDNGFileURL: URL?
-//
-//                let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).map(\.path)
-//                let documentsDirectory = paths[0]
-//                let format = DateFormatter()
-//                format.dateFormat = "MMddyyyyHHmmss"
-//                let assetDateString = format.string(from: Date())
-//                let assetPath = URL(fileURLWithPath: documentsDirectory).appendingPathComponent(assetDateString + (".dng")).absoluteString
-//                temporaryDNGFileURL = URL(fileURLWithPath: assetPath)
-//                imageData.write(to: temporaryDNGFileURL, atomically: true)
-//
-//                activityItems = [temporaryDNGFileURL] as [Any]
-//
-//                  let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
-//
-//                //                     activityViewController.excludedActivityTypes = [UIActivity.ActivityType.print, UIActivity.ActivityType.postToWeibo, UIActivity.ActivityType.addToReadingList, UIActivity.ActivityType.postToVimeo, UIActivity.ActivityType.saveToCameraRoll, UIActivity.ActivityType.assignToContact]
-//
-//                                     activityViewController.popoverPresentationController?.sourceView = self.view
-//                                     self.present(activityViewController, animated: true, completion: nil)
-//
-//            })
-            
-                   
             
             var path = String()
-//
+            //
             if let resourcePath = Bundle.main.resourcePath {
                 let imgName = "Summer1"
                 path = resourcePath + "/" + imgName
             }
             let imageFileName = "Summer1"
-
+            
             if let audioFilePath = Bundle.main.path(forResource: imageFileName, ofType: "dng", inDirectory: nil) {
                 print(audioFilePath)
                 path = audioFilePath;
             }
             
-
-//            let fileURL = NSURL(fileURLWithPath: path)
-//
-//            // Create the Array which includes the files you want to share
-//            var filesToShare = [Any]()
-//
-//            // Add the path of the file to the Array
-//            filesToShare.append(fileURL)
-//
-//            // Make the activityViewContoller which shows the share-view
-//            let activityViewController = UIActivityViewController(activityItems: filesToShare, applicationActivities: nil)
-//
-//            // Show the share-view
-//            self.present(activityViewController, animated: true, completion: nil)
-//            let fileURL = URL(fileURLWithPath: path)
-//            let phasset = PHAssetForFileURL(url: fileURL as NSURL)!;
             
-           
+            
             var assetObj:PHFetchResult<PHAsset>!
             
             DispatchQueue.global(qos: .userInitiated).async {
@@ -219,39 +60,42 @@ class FOverviewViewController: UIViewController {
                     
                     if(assetObj != nil){
                         let temporaryDNGFileURL = URL(fileURLWithPath: path)
-                                    
-                                    let options = PHImageRequestOptions()
-
-                                    options.isSynchronous = false
-                                    options.version = .current
-                                    options.deliveryMode = .opportunistic
-                                    options.resizeMode = .none
-                                    options.isNetworkAccessAllowed = false
-                                    
-                                    guard assetObj.count > 0 else { return }
-                                    PHImageManager.default().requestImageData(for: assetObj.lastObject!, options: options, resultHandler: {
-                                        imageData, dataUTI, imageOrientation, info in
-
-                                        let assetURL = temporaryDNGFileURL
-                                        _ = assetURL.pathExtension
-                                                
-                                        try? imageData?.write(to: temporaryDNGFileURL)
                         
-                                        })
-                                    
-                                     let shareAll = [temporaryDNGFileURL] as [Any]
-                                    
-                                     let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
-                                    
-                                    activityViewController.popoverPresentationController?.sourceView = self.view
-                                    self.present(activityViewController, animated: true, completion: nil)
+                        let options = PHImageRequestOptions()
+                        
+                        options.isSynchronous = false
+                        options.version = .current
+                        options.deliveryMode = .opportunistic
+                        options.resizeMode = .none
+                        options.isNetworkAccessAllowed = false
+                        
+                        guard assetObj.count > 0 else { return }
+                        PHImageManager.default().requestImageData(for: assetObj.lastObject!, options: options, resultHandler: {
+                            imageData, dataUTI, imageOrientation, info in
+                            
+                            let assetURL = temporaryDNGFileURL
+                            _ = assetURL.pathExtension
+                            
+                            try? imageData?.write(to: temporaryDNGFileURL)
+                            
+                        })
+                        
+                        let shareAll = [temporaryDNGFileURL] as [Any]
+                        
+                        let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
+                        
+                        activityViewController.popoverPresentationController?.sourceView = self.view
+                        self.present(activityViewController, animated: true, completion: nil)
                     }
-
+                    
                 }
             }
             
+        } else {
             
             
+        }
+        
     }
     
     var image: UIImage!
