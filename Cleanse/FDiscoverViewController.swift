@@ -256,9 +256,22 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
                     // common MH conditions and stressors, job interviews
             
             genres.append("Influencers")
-            genres.append("Models")
-            genres.append("Atheletes")
-            genres.append("Eras")
+            genres.append("Travel")
+            genres.append("Vintage")
+            genres.append("B&W")
+            genres.append("City")
+            genres.append("Selfies")
+            genres.append("Beauty")
+            genres.append("Fashion")
+            genres.append("Coast")
+            genres.append("Island")
+            genres.append("Nature")
+            genres.append("Desert")
+            genres.append("Beach")
+            genres.append("Mexico")
+            genres.append("Bali")
+            genres.append("Fall")
+            genres.append("Winter")
 
 //                                                genres.append("Winter")
 //                                                genres.append("Fall")
@@ -334,7 +347,7 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
                 var screenHeight = screenSize.height
 
                 let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-                layout.sectionInset = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
+                layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
             layout.itemSize = CGSize(width: screenWidth/1.1, height: screenWidth)
                 layout.minimumInteritemSpacing = 0
                 layout.minimumLineSpacing = 0
@@ -903,7 +916,7 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
 
 
 
-                        cell.titleImage.layer.cornerRadius = 5.0
+                        cell.titleImage.layer.cornerRadius = 10.0
                         cell.titleImage.clipsToBounds = true
                         cell.titleImage.alpha = 1
 
@@ -928,7 +941,7 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
 
                     }
 
-                    cell.layer.cornerRadius = 5.0
+                    cell.layer.cornerRadius = 10.0
                     cell.layer.masksToBounds = true
 
                     cell.titlelabel.alpha = 1
