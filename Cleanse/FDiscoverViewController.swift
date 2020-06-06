@@ -225,37 +225,6 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
                 queryforinfo()
                 
             genres.removeAll()
-    //        genres.append("Work")
-    //        genres.append("Parents")
-    //        genres.append("Girls")
-    //        genres.append("Friends")
-    //        genres.append("Weight")
-    //        genres.append("Mental Health")
-            
-            // most common traumatic events
-    //        genres.append("Death")
-    //        genres.append("Divorce")
-    //        genres.append("Work")
-    //        genres.append("Money")
-    //        genres.append("Moving")
-    //        genres.append("Sick")
-    //        genres.append("Injured")
-
-            
-                    // reflectly
-            
-    //            genres.append("Work")
-    //            genres.append("Family")
-    //            genres.append("Relationship")
-    //            genres.append("School")
-    //            genres.append("Food")
-    //            genres.append("Travel")
-    //            genres.append("Friends")
-    //            genres.append("Religion")
-    //            genres.append("Education")
-
-                    // common MH conditions and stressors, job interviews
-            
             genres.append("Influencers")
             genres.append("Travel")
             genres.append("Vintage")
@@ -458,7 +427,7 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
             
             DispatchQueue.global(qos: .userInitiated).async {
                 let options = PHFetchOptions()
-                options.sortDescriptors = [NSSortDescriptor.init(key: "creationDate", ascending: false)]
+                options.sortDescriptors = [NSSortDescriptor.init(key: "creationDate", ascending: true)]
                 options.predicate = NSPredicate(format: "mediaType = %d || mediaType = %d || mediaType = %d", PHAssetMediaType.image.rawValue, PHAssetMediaType.video.rawValue,
                                                 PHAssetMediaType.unknown.rawValue)
                 options.includeAllBurstAssets = false
@@ -470,6 +439,7 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
                     print("Loaded \(fetchResults.count) images.")
                     
                     if(assetObj != nil){
+                        
                         let temporaryDNGFileURL = Url
                         
                         let options = PHImageRequestOptions()
@@ -728,6 +698,8 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
                     headlines.append(book?.headline8 ?? "x")
                     
                     headlines = headlines.filter{$0 != "x"}
+                    
+                    ref?.child(uid).child("Favorites").child(selectedbookid).updateChildValues(["Inspired":selectedtitle, "Download" : selecteddownload, "After" : selectedafterimage])
 
                  
                                                 
