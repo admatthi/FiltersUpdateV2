@@ -51,6 +51,7 @@
 		9DF8F01224875E65003AE42D /* Summer1.dng in Resources */ = {isa = PBXBuildFile; fileRef = 9DF8F01124875E65003AE42D /* Summer1.dng */; };
 		9DF8F014248B06A2003AE42D /* FTodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF8F013248B06A1003AE42D /* FTodayViewController.swift */; };
 		9DF8F016248B06AD003AE42D /* FFavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF8F015248B06AD003AE42D /* FFavoritesViewController.swift */; };
+		9DF9F693248D4E3E00514E8A /* HowItWorksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF9F692248D4E3E00514E8A /* HowItWorksViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,7 +97,7 @@
 		9D328D1B2366593C003768CF /* TitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionViewCell.swift; sourceTree = "<group>"; };
 		9D328D1D23665959003768CF /* GenreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreCollectionViewCell.swift; sourceTree = "<group>"; };
 		9D503BBB237252AE0070F318 /* OverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewViewController.swift; sourceTree = "<group>"; };
-		9D7360E3236513DC00DC6ACB /* Filters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Filters.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D7360E3236513DC00DC6ACB /* Mypresets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mypresets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D7360E6236513DC00DC6ACB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9D7360EC236513DE00DC6ACB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9D7360EF236513DE00DC6ACB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -121,6 +122,7 @@
 		9DF8F01124875E65003AE42D /* Summer1.dng */ = {isa = PBXFileReference; lastKnownFileType = file; name = Summer1.dng; path = Assets.xcassets/Summer1.dng.dataset/Summer1.dng; sourceTree = "<group>"; };
 		9DF8F013248B06A1003AE42D /* FTodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTodayViewController.swift; sourceTree = "<group>"; };
 		9DF8F015248B06AD003AE42D /* FFavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFavoritesViewController.swift; sourceTree = "<group>"; };
+		9DF9F692248D4E3E00514E8A /* HowItWorksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowItWorksViewController.swift; sourceTree = "<group>"; };
 		B9E498B84B2ACBF50B5B77A4 /* Pods-CleanseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanseTests.release.xcconfig"; path = "Target Support Files/Pods-CleanseTests/Pods-CleanseTests.release.xcconfig"; sourceTree = "<group>"; };
 		BB4E75DE477705A6F1FDAAF7 /* Pods_CleanseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CleanseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -181,7 +183,7 @@
 		9D7360E4236513DC00DC6ACB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9D7360E3236513DC00DC6ACB /* Filters.app */,
+				9D7360E3236513DC00DC6ACB /* Mypresets.app */,
 				9D7360F9236513DE00DC6ACB /* CleanseTests.xctest */,
 				9D736104236513DE00DC6ACB /* CleanseUITests.xctest */,
 			);
@@ -194,6 +196,7 @@
 				9DF8F01124875E65003AE42D /* Summer1.dng */,
 				9D7360E6236513DC00DC6ACB /* AppDelegate.swift */,
 				9D328D0923651B26003768CF /* Main.storyboard */,
+				9DF9F692248D4E3E00514E8A /* HowItWorksViewController.swift */,
 				9DD9B3FF239C047A0061D960 /* HomeTableViewCell.swift */,
 				9D328D112365F5DC003768CF /* DiscoverViewController.swift */,
 				9D9020A9247EBD6B003B4DE0 /* FDiscoverViewController.swift */,
@@ -286,7 +289,7 @@
 			);
 			name = Cleanse;
 			productName = Cleanse;
-			productReference = 9D7360E3236513DC00DC6ACB /* Filters.app */;
+			productReference = 9D7360E3236513DC00DC6ACB /* Mypresets.app */;
 			productType = "com.apple.product-type.application";
 		};
 		9D7360F8236513DE00DC6ACB /* CleanseTests */ = {
@@ -528,6 +531,7 @@
 				9D0663AF2367B3AA00385DEE /* Genre.swift in Sources */,
 				9DD64A2F23760A1D00F159E5 /* HomeTabViewController.swift in Sources */,
 				9DD9B400239C047A0061D960 /* HomeTableViewCell.swift in Sources */,
+				9DF9F693248D4E3E00514E8A /* HowItWorksViewController.swift in Sources */,
 				9D328D122365F5DC003768CF /* DiscoverViewController.swift in Sources */,
 				9D2D42562373360A003E21C1 /* EntriesViewController.swift in Sources */,
 				9DF6E6F023AC8B6E00DCB973 /* DepressionViewController.swift in Sources */,
@@ -711,7 +715,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3FFB7E1A40DB188ABB430764 /* Pods-Cleanse.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-46";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-52";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -725,8 +729,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.7.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aatech.Beautyplan;
-				PRODUCT_NAME = Filters;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aatech.beautyplan;
+				PRODUCT_NAME = Mypresets;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -737,7 +741,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6E785B0B06B646A92655E699 /* Pods-Cleanse.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-46";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-52";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -751,8 +755,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.7.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aatech.Beautyplan;
-				PRODUCT_NAME = Filters;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aatech.beautyplan;
+				PRODUCT_NAME = Mypresets;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -22,7 +22,6 @@ var actualdiscount = String()
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var purchases: Purchases?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -59,6 +58,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //              UserDefaults.standard.set(true, forKey: "launchedBefore")
 //              
 //          }
+        
+            Purchases.debugLogsEnabled = true
+          Purchases.configure(withAPIKey: "tmZRqrJSZLUztKFTwWHUhyFKzZFbDRHP", appUserID: nil)
+          
+          referrer = "On Open"
+          
+          let mainStoryboardIpad : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+          let tabBarBuyer : UITabBarController = mainStoryboardIpad.instantiateViewController(withIdentifier: "HomeTab") as! UITabBarController
+          
+          uid = UIDevice.current.identifierForVendor?.uuidString ?? "x"
+          
         
         queryforpaywall()
         return true
@@ -97,18 +107,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 
     // MARK: UISceneSession Lifecycle
-    weak var purchasesdelegate: SnippetsPurchasesDelegate?
 
 
 
 
 }
 
-protocol SnippetsPurchasesDelegate: AnyObject {
 
-    func purchaseCompleted(product: String)
-
-}
 
 
 

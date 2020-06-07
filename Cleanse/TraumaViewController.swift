@@ -21,108 +21,112 @@ class TraumaViewController: UIViewController, UICollectionViewDelegate, UICollec
         return books.count
     }
     
+    var genres = [String]()
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-            refer = "On Tap Discover"
-
-            let generator = UIImpactFeedbackGenerator(style: .heavy)
-            generator.impactOccurred()
-            self.view.endEditing(true)
-            titleCollectionView.isUserInteractionEnabled = true
-
-            if collectionView.tag == 1 {
-
-                selectedindex = indexPath.row
-
-                genreCollectionView.scrollToItem(at: indexPath, at: UICollectionView.ScrollPosition.centeredHorizontally, animated: true)
-
-                collectionView.alpha = 0
-
-                selectedgenre = genres[indexPath.row]
-
-
-                genreindex = indexPath.row
-
-                queryforids { () -> Void in
-
-                }
-
-    //            titleCollectionView.scrollToItem(at: indexPath, at: .top, animated: false)
+        
+        refer = "On Tap Discover"
+        
+        let generator = UIImpactFeedbackGenerator(style: .heavy)
+        generator.impactOccurred()
+        self.view.endEditing(true)
+        titleCollectionView.isUserInteractionEnabled = true
+        
+        if collectionView.tag == 1 {
+            
+            selectedindex = indexPath.row
+            
+            genreCollectionView.scrollToItem(at: indexPath, at: UICollectionView.ScrollPosition.centeredHorizontally, animated: true)
+            
+            collectionView.alpha = 0
+            
+            selectedgenre = genres[indexPath.row]
+            
+            
+            genreindex = indexPath.row
+            
+            queryforids { () -> Void in
                 
-
-                genreCollectionView.reloadData()
-
-            } else {
-
-                let book = self.book(atIndexPath: indexPath)
-                
-                
-                headlines.removeAll()
-                
-                bookindex = indexPath.row
-                selectedauthorname = book?.author ?? ""
-                selectedtitle = book?.name ?? ""
-                selectedurl = book?.audioURL ?? ""
-                selectedbookid = book?.bookID ?? ""
-                selectedgenre = book?.genre ?? ""
-                selectedamazonurl = book?.amazonURL ?? ""
-                selecteddescription = book?.description ?? ""
-                selectedduration = book?.duration ?? 15
-                selectedheadline = book?.headline1 ?? ""
-                selectedprofession = book?.profession ?? ""
-                selectedauthorimage = book?.authorImage ?? ""
-                selectedbackground = book?.imageURL ?? ""
-
-                    
-                headlines.append(book?.headline1 ?? "x")
-                headlines.append(book?.headline2 ?? "x")
-                headlines.append(book?.headline3 ?? "x")
-                headlines.append(book?.headline4 ?? "x")
-                headlines.append(book?.headline5 ?? "x")
-                headlines.append(book?.headline6 ?? "x")
-                headlines.append(book?.headline7 ?? "x")
-                headlines.append(book?.headline8 ?? "x")
-                
-                headlines = headlines.filter{$0 != "x"}
-
-                let alert = UIAlertController(title: "What would you like to do?", message: "", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Read", style: .default, handler: { action in
-                      switch action.style{
-                      case .default:
-                            print("default")
-
-                        
-                      case .cancel:
-                            print("cancel")
-
-                      case .destructive:
-                            print("destructive")
-
-
-                }}))
-                alert.addAction(UIAlertAction(title: "Listen", style: .default, handler: { action in
-                               switch action.style{
-                               case .default:
-                                     print("default")
-
-                                     self.performSegue(withIdentifier: "HomeToListen", sender: self)
-                               case .cancel:
-                                     print("cancel")
-
-                               case .destructive:
-                                     print("destructive")
-
-
-                         }}))
-                
-                
-                    self.performSegue(withIdentifier: "TraumaToRead", sender: self)
-
-             
             }
-
-
+            
+            //            titleCollectionView.scrollToItem(at: indexPath, at: .top, animated: false)
+            
+            
+            genreCollectionView.reloadData()
+            
+        } else {
+            
+            let book = self.book(atIndexPath: indexPath)
+            
+            
+            headlines.removeAll()
+            
+            bookindex = indexPath.row
+            selectedauthorname = book?.author ?? ""
+            selectedtitle = book?.name ?? ""
+            selectedurl = book?.audioURL ?? ""
+            selectedbookid = book?.bookID ?? ""
+            selectedgenre = book?.genre ?? ""
+            selectedamazonurl = book?.amazonURL ?? ""
+            selecteddescription = book?.description ?? ""
+            selectedduration = book?.duration ?? 15
+            selectedheadline = book?.headline1 ?? ""
+            selectedprofession = book?.profession ?? ""
+            selectedauthorimage = book?.authorImage ?? ""
+            selectedbackground = book?.imageURL ?? ""
+            
+            
+            headlines.append(book?.headline1 ?? "x")
+            headlines.append(book?.headline2 ?? "x")
+            headlines.append(book?.headline3 ?? "x")
+            headlines.append(book?.headline4 ?? "x")
+            headlines.append(book?.headline5 ?? "x")
+            headlines.append(book?.headline6 ?? "x")
+            headlines.append(book?.headline7 ?? "x")
+            headlines.append(book?.headline8 ?? "x")
+            
+            headlines = headlines.filter{$0 != "x"}
+            
+            let alert = UIAlertController(title: "What would you like to do?", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Read", style: .default, handler: { action in
+                switch action.style{
+                case .default:
+                    print("default")
+                    
+                    
+                case .cancel:
+                    print("cancel")
+                    
+                case .destructive:
+                    print("destructive")
+                    
+                    
+                }}))
+            alert.addAction(UIAlertAction(title: "Listen", style: .default, handler: { action in
+                switch action.style{
+                case .default:
+                    print("default")
+                    
+                    self.performSegue(withIdentifier: "HomeToListen", sender: self)
+                case .cancel:
+                    print("cancel")
+                    
+                case .destructive:
+                    print("destructive")
+                    
+                    
+                }}))
+            
+            
+            self.performSegue(withIdentifier: "TraumaToRead", sender: self)
+            
+            
         }
+        
+        
+    }
+    
+
     
     func queryforids(completed: @escaping (() -> Void) ) {
 

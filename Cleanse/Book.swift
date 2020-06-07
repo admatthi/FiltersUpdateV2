@@ -54,6 +54,7 @@ struct Book {
     let intdate: Int?
     let title: String?
     let download: String?
+    let views: String?
 
 
     let summary: Summary
@@ -103,6 +104,7 @@ struct Book {
         self.after = json["After"] as? String
         self.inspiredby = json["Inspired"] as? String
         self.download = json["Download"] as? String
+        self.views = json["Views"] as? String
 
 
 

@@ -46,13 +46,13 @@ class HomeTabViewController: UITabBarController {
 
         // Do any additional setup after loading the view.
         
-    tabBar.isTranslucent = true
-        tabBar.backgroundImage = UIImage()
-        tabBar.shadowImage = UIImage() // add this if you want remove tabBar separator
-        tabBar.barTintColor = .clear
-        tabBar.backgroundColor = .black // here is your tabBar color
-        tabBar.layer.backgroundColor = UIColor.clear.cgColor
-        
+//    tabBar.isTranslucent = true
+//        tabBar.backgroundImage = UIImage()
+//        tabBar.shadowImage = UIImage() // add this if you want remove tabBar separator
+//        tabBar.barTintColor = .clear
+//        tabBar.backgroundColor = .black // here is your tabBar color
+//        tabBar.layer.backgroundColor = UIColor.clear.cgColor
+//        
         
 
     }

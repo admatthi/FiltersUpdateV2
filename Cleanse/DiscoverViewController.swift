@@ -16,7 +16,6 @@ import AVFoundation
 
 var wishlistids = [String]()
 var selectedgenre = String()
-var genres = [String]()
 var counter = Int()
 var musictimer : Timer?
 var updater : CADisplayLink?
@@ -60,6 +59,8 @@ class DiscoverViewController: UIViewController, UICollectionViewDelegate, UIColl
 
         @IBOutlet weak var tapback: UIButton!
         @IBOutlet weak var tapbuton: UIButton!
+    var genres = [String]()
+
         @IBAction func tapBack(_ sender: Any) {
 
             titleCollectionView.alpha = 0

@@ -130,6 +130,9 @@ class FFavoritesViewController: UIViewController, UICollectionViewDataSource, UI
 
                     }
                 }
+    
+    var genres = [String]()
+
                 @IBOutlet weak var tapgenre: UILabel!
                 @IBOutlet weak var tapselectedgenre: UIButton!
                 @IBOutlet weak var titleCollectionView: UICollectionView!
@@ -215,7 +218,6 @@ class FFavoritesViewController: UIViewController, UICollectionViewDataSource, UI
 
                     ref = Database.database().reference()
 
-                    queryforinfo()
                     
                 genres.removeAll()
 
@@ -355,24 +357,28 @@ class FFavoritesViewController: UIViewController, UICollectionViewDataSource, UI
                                 return
                             }
                 
+                let filePath = documentsURL.appendingPathComponent("\(url.lastPathComponent)").path
+                
                 var assetObj:PHFetchResult<PHAsset>!
                 
                 DispatchQueue.global(qos: .userInitiated).async {
                     let options = PHFetchOptions()
                     options.sortDescriptors = [NSSortDescriptor.init(key: "creationDate", ascending: true)]
-                    options.predicate = NSPredicate(format: "mediaType = %d || mediaType = %d || mediaType = %d", PHAssetMediaType.image.rawValue, PHAssetMediaType.video.rawValue,
-                                                    PHAssetMediaType.unknown.rawValue)
+                    options.predicate = NSPredicate(format: "mediaType = %d || mediaType = %d ", PHAssetMediaType.image.rawValue, PHAssetMediaType.video.rawValue)
                     options.includeAllBurstAssets = false
+                    options.includeHiddenAssets = true
                     
+                    let fileString = url.lastPathComponent
                     
                     let fetchResults = PHAsset.fetchAssets(with: options)
+                    
                     DispatchQueue.main.async {
                         assetObj = fetchResults
                         print("Loaded \(fetchResults.count) images.")
                         
                         if(assetObj != nil){
                             
-                            let temporaryDNGFileURL = Url
+                            let temporaryDNGFileURL = URL(fileURLWithPath: filePath)
                             
                             let options = PHImageRequestOptions()
                             
@@ -383,6 +389,7 @@ class FFavoritesViewController: UIViewController, UICollectionViewDataSource, UI
                             options.isNetworkAccessAllowed = false
                             
                             guard assetObj.count > 0 else { return }
+                            
                             PHImageManager.default().requestImageData(for: assetObj.lastObject!, options: options, resultHandler: {
                                 imageData, dataUTI, imageOrientation, info in
                                 
@@ -390,11 +397,11 @@ class FFavoritesViewController: UIViewController, UICollectionViewDataSource, UI
                                 _ = assetURL.pathExtension
                                 
                                 
-                                try? imageData?.write(to: fileURL)
+                               // try? imageData?.write(to: temporaryDNGFileURL)
                                 
                             })
                             
-                            let shareAll = [fileURL] as [Any]
+                            let shareAll = [temporaryDNGFileURL] as [Any]
                             
                             let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
                             
@@ -922,7 +929,16 @@ class FFavoritesViewController: UIViewController, UICollectionViewDataSource, UI
                         cell.titlelabel.alpha = 1
                         cell.titlelabel.alpha = 1
 
-                        
+                        if book?.views != nil {
+                                      
+                                      cell.viewslabel.text = book?.views
+
+                                      
+                                  } else {
+                                      
+                                      cell.viewslabel.text = "1.3M uses"
+
+                                  }
                      
 
                   
