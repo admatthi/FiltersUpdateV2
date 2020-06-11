@@ -8,7 +8,21 @@
 
 import UIKit
 
-class HowItWorksViewController: UIViewController {
+class HowItWorksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+                
+                return 1
+
+            }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Works", for: indexPath) as! HOwitWorksTableViewCell
+        
+        return cell
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,7 +30,11 @@ class HowItWorksViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func tapBack(_ sender: Any) {
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 

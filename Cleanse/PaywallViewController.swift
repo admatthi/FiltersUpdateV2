@@ -104,11 +104,14 @@ var delegate : SwiftPaywallDelegate?
             MBProgressHUD.hide(for: self.view, animated: true)
 
                   if let error = error {
+                    
+                    MBProgressHUD.hide(for: self.view, animated: true)
+
                       if let purchaseFailedHandler = self.delegate?.purchaseFailed {
                           purchaseFailedHandler(self, info, error, cancelled)
                       } else {
                           if !cancelled {
-                              
+                            
                           }
                       }
                   } else  {

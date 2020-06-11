@@ -14,6 +14,7 @@ import Kingfisher
 import Kingfisher
 import Photos
 import MBProgressHUD
+import FBSDKCoreKit
 
 var selectedbeforeimage = String()
 var selectedafterimage = String()
@@ -32,6 +33,7 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
             
         }
     }
+    @IBOutlet weak var tapHow: UIButton!
     
     override func viewDidAppear(_ animated: Bool) {
         
@@ -39,6 +41,16 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
         texttwo = ""
         textthree = ""
         
+        if didpurchase {
+            
+            tapHow.alpha = 1
+        } else {
+            
+            tapHow.alpha = 0
+        }
+        
+    }
+    @IBAction func taphow(_ sender: Any) {
     }
     
     @IBOutlet var searchField: UITextField!
@@ -231,22 +243,28 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
         genres.removeAll()
         genres.append("Most Popular")
         genres.append("New")
-        genres.append("Travel")
-        genres.append("Vintage")
-        genres.append("B&W")
-        genres.append("City")
-        genres.append("Selfies")
-        genres.append("Beauty")
-        genres.append("Fashion")
-        genres.append("Coast")
-        genres.append("Island")
-        genres.append("Nature")
-        genres.append("Desert")
-        genres.append("Beach")
-        genres.append("Mexico")
+        genres.append("Natural")
         genres.append("Vivid")
-        genres.append("Fall")
-        genres.append("Winter")
+        genres.append("Bright")
+        genres.append("High Contrast")
+        genres.append("Detail")
+        genres.append("Matte")
+
+//        genres.append("Travel")
+//        genres.append("Vintage")
+//        genres.append("B&W")
+//        genres.append("City")
+//        genres.append("Selfies")
+//        genres.append("Beauty")
+//        genres.append("Fashion")
+//        genres.append("Coast")
+//        genres.append("Island")
+//        genres.append("Nature")
+//        genres.append("Desert")
+//        genres.append("Beach")
+//        genres.append("Mexico")
+//        genres.append("Fall")
+//        genres.append("Winter")
         
         //                                                genres.append("Winter")
         //                                                genres.append("Fall")
@@ -618,18 +636,18 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
     var dayofmonth = String()
     
     func addstaticbooks() {
-        
-        selectedgenre = "Love"
-        
-        var counter2 = 7
+                
+        var counter2 = 0
         
         while counter2 < 12 {
             
-            ref?.child("AllBooks1").child(selectedgenre).child("\(counter2)").updateChildValues(["Author": "Jordan B. Peterson", "BookID": "\(counter2)", "Description": "What does everyone in the modern world need to know? Renowned psychologist Jordan B. Peterson's answer to this most difficult of questions uniquely combines the hard-won truths of ancient tradition with the stunning revelations of cutting-edge scientific research.", "Genre": "\(selectedgenre)", "Image": "F\(counter2)", "Name": "12 Rules for Life", "Completed": "No", "Views": "x", "AmazonURL": "https://www.amazon.com/b?ie=UTF8&node=17025012011"])
+//            ref?.child("AllBooks1").child(selectedgenre).child("\(counter2)").updateChildValues(["Author": "Jordan B. Peterson", "BookID": "\(counter2)", "Description": "What does everyone in the modern world need to know? Renowned psychologist Jordan B. Peterson's answer to this most difficult of questions uniquely combines the hard-won truths of ancient tradition with the stunning revelations of cutting-edge scientific research.", "Genre": "\(selectedgenre)", "Image": "F\(counter2)", "Name": "12 Rules for Life", "Completed": "No", "Views": "x", "AmazonURL": "https://www.amazon.com/b?ie=UTF8&node=17025012011"])
             
             //    ref?.child("AllBooks2").child(selectedgenre).child("\(counter2)").updateChildValues([ "Views" : "\(nineviews[counter2])"])
             
-            ref?.child("AllBooks1").child(selectedgenre).child("\(counter2)").child("Summary").child("Text").updateChildValues(["1": "x", "2": "x", "3": "x", "4": "x", "5": "x", "6": "x", "7": "x", "8": "x", "9": "x", "10": "x", "11": "x", "12": "x", "13": "x", "14": "x", "15": "x", "16": "x", "17": "x", "18": "x", "19": "x", "20": "x", "Title": "x"])
+            var randomint = Int.random(in: 1..<10)
+
+            ref?.child("AllBooks1").child(selectedgenre).childByAutoId().updateChildValues(["After" : "x", "Download" : "x", "Inspired" : "x", "Views" : "\(randomint)M Uses"])
             
             counter2 += 1
             
@@ -668,9 +686,13 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
                 
             }
             
-            //            titleCollectionView.scrollToItem(at: indexPath, at: .top, animated: false)
+            logCategoryPressed(referrer: referrer)
             
+                        titleCollectionView.scrollToItem(at: indexPath, at: .top, animated: false)
+//            addstaticbooks()
             
+            let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
+
             genreCollectionView.reloadData()
             
         } else {
@@ -709,8 +731,8 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
             
             headlines = headlines.filter{$0 != "x"}
             
-            ref?.child(uid).child("Favorites").child(selectedbookid).updateChildValues(["Inspired":selectedtitle, "Download" : selecteddownload, "After" : selectedafterimage])
             
+            logUsePressed(referrer: referrer)
             
             
             if didpurchase {
@@ -726,6 +748,9 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
                 let file = NSURL(string: selecteddownload);
                 
                 downloadImage(from:file! as URL)
+                
+                ref?.child(uid).child("Favorites").child(selectedbookid).updateChildValues(["Inspired":selectedtitle, "Download" : selecteddownload, "After" : selectedafterimage])
+
             } else {
                 self.performSegue(withIdentifier: "FDiscoverToSale", sender: self)
                 
@@ -733,6 +758,47 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
             
         }
         
+        
+        
+    }
+    func configurationTextField(textField: UITextField!){
+               textField?.placeholder = "Promo Code"
+               
+           }
+    
+    @IBAction func tapDiscount(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "Please enter your discount code", message: "", preferredStyle: .alert)
+        
+        alert.addTextField(configurationHandler: configurationTextField)
+        
+        alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { action in
+            switch action.style{
+            case .default:
+                print("default")
+                
+                let textField = alert.textFields![0] // Force unwrapping because we know it exists.
+                
+                if textField.text != "" {
+                                               
+                        didpurchase = true
+                        
+                        ref?.child("Users").child(uid).updateChildValues(["Purchased" : "True"])
+                        
+                    }
+                    
+                         
+                
+            case .cancel:
+                print("cancel")
+                
+            case .destructive:
+                print("destructive")
+                
+                
+            }}))
+        
+        self.present(alert, animated: true, completion: nil)
         
         
     }
@@ -1185,6 +1251,7 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
             }
             
             
+            logFilterViewed(referrer: referrer)
             
             
             return cell
@@ -1237,6 +1304,18 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
             
         }
         
+    }
+    
+    func logUsePressed(referrer : String) {
+          AppEvents.logEvent(AppEvents.Name(rawValue: "use pressed"), parameters: ["referrer" : referrer, "bookID" : selectedbookid, "genre" : selectedgenre])
+      }
+    
+    func logCategoryPressed(referrer : String) {
+        AppEvents.logEvent(AppEvents.Name(rawValue: "category pressed"), parameters: ["referrer" : referrer, "genre" : selectedgenre])
+    }
+    
+    func logFilterViewed(referrer : String) {
+        AppEvents.logEvent(AppEvents.Name(rawValue: "filter viewed"), parameters: ["referrer" : referrer, "bookID" : selectedbookid, "genre" : selectedgenre])
     }
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!

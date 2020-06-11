@@ -28,9 +28,9 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FacebookAppID</key>
-	<string>2595229670571054</string>
+	<string>732972430775250</string>
 	<key>FacebookDisplayName</key>
-	<string>Chill</string>
+	<string>MyPresets</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
