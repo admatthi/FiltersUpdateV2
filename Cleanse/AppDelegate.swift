@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //          }
         
             Purchases.debugLogsEnabled = true
-          Purchases.configure(withAPIKey: "tmZRqrJSZLUztKFTwWHUhyFKzZFbDRHP", appUserID: nil)
+          Purchases.configure(withAPIKey: "ryfdDUwKGrQKWbGaaYJjIobqbOruFudh", appUserID: nil)
           
           referrer = "On Open"
           

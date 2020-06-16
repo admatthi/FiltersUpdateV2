@@ -33,7 +33,7 @@ var delegate : SwiftPaywallDelegate?
     
     @IBOutlet weak var termstext: UILabel!
     @IBOutlet weak var disclaimertext: UIButton!
-    var purchases = Purchases.configure(withAPIKey: "tmZRqrJSZLUztKFTwWHUhyFKzZFbDRHP", appUserID: nil)
+    var purchases = Purchases.configure(withAPIKey: "ryfdDUwKGrQKWbGaaYJjIobqbOruFudh", appUserID: nil)
     
     
     @IBAction func tapRestore(_ sender: Any) {

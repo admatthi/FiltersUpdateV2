@@ -460,6 +460,8 @@ class FTodayViewController: UIViewController,  UICollectionViewDataSource, UICol
                         
                         let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
                         
+                        MBProgressHUD.hide(for: self.view, animated: true)
+
                         activityViewController.popoverPresentationController?.sourceView = self.view
                         self.present(activityViewController, animated: true, completion: nil)
                     }
@@ -662,7 +664,8 @@ class FTodayViewController: UIViewController,  UICollectionViewDataSource, UICol
             let book = self.book(atIndexPath: indexPath)
             
             //print("CELL ITEM===>", book ?? [])
-            
+            let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
+
             headlines.removeAll()
             
             bookindex = indexPath.row

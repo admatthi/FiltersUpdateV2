@@ -495,6 +495,8 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
                         let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
                         
                         activityViewController.popoverPresentationController?.sourceView = self.view
+                        MBProgressHUD.hide(for: self.view, animated: true)
+
                         self.present(activityViewController, animated: true, completion: nil)
                     }
                     
@@ -669,6 +671,8 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
         self.view.endEditing(true)
         titleCollectionView.isUserInteractionEnabled = true
         
+
+        
         if collectionView.tag == 1 {
             
             selectedindex = indexPath.row
@@ -700,6 +704,9 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
             let book = self.book(atIndexPath: indexPath)
             
             //print("CELL ITEM===>", book ?? [])
+            
+            let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
+
             
             headlines.removeAll()
             

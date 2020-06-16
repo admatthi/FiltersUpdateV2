@@ -405,6 +405,8 @@ class FFavoritesViewController: UIViewController, UICollectionViewDataSource, UI
                             
                             let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
                             
+                            MBProgressHUD.hide(for: self.view, animated: true)
+
                             activityViewController.popoverPresentationController?.sourceView = self.view
                             self.present(activityViewController, animated: true, completion: nil)
                         }
@@ -609,7 +611,8 @@ class FFavoritesViewController: UIViewController, UICollectionViewDataSource, UI
                         //print("CELL ITEM===>", book ?? [])
                         
                         headlines.removeAll()
-                        
+                        let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
+
                         bookindex = indexPath.row
                         selectedauthorname = book?.author ?? ""
                         selectedtitle = book?.inspiredby ?? ""

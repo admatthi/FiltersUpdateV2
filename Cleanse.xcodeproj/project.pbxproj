@@ -27,6 +27,9 @@
 		9D328D1A23662937003768CF /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D328D1923662937003768CF /* TextViewController.swift */; };
 		9D328D1C2366593C003768CF /* TitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D328D1B2366593C003768CF /* TitleCollectionViewCell.swift */; };
 		9D328D1E23665959003768CF /* GenreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D328D1D23665959003768CF /* GenreCollectionViewCell.swift */; };
+		9D4F21D22495159D00A18902 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D4F21D12495159D00A18902 /* GoogleService-Info.plist */; };
+		9D4F21D32495159D00A18902 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D4F21D12495159D00A18902 /* GoogleService-Info.plist */; };
+		9D4F21D42495159D00A18902 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D4F21D12495159D00A18902 /* GoogleService-Info.plist */; };
 		9D503BBC237252AE0070F318 /* OverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D503BBB237252AE0070F318 /* OverviewViewController.swift */; };
 		9D7360E7236513DC00DC6ACB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7360E6236513DC00DC6ACB /* AppDelegate.swift */; };
 		9D7360ED236513DE00DC6ACB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D7360EC236513DE00DC6ACB /* Assets.xcassets */; };
@@ -43,9 +46,6 @@
 		9DF6E6EE23AC8B6300DCB973 /* SleepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF6E6ED23AC8B6300DCB973 /* SleepViewController.swift */; };
 		9DF6E6F023AC8B6E00DCB973 /* DepressionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF6E6EF23AC8B6E00DCB973 /* DepressionViewController.swift */; };
 		9DF6E6F223AC8B8200DCB973 /* TraumaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF6E6F123AC8B8200DCB973 /* TraumaViewController.swift */; };
-		9DF8F0082482DFE8003AE42D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DF8F0072482DFE7003AE42D /* GoogleService-Info.plist */; };
-		9DF8F0092482DFE8003AE42D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DF8F0072482DFE7003AE42D /* GoogleService-Info.plist */; };
-		9DF8F00A2482DFE8003AE42D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DF8F0072482DFE7003AE42D /* GoogleService-Info.plist */; };
 		9DF8F00C2483048F003AE42D /* FOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF8F00B2483048F003AE42D /* FOverviewViewController.swift */; };
 		9DF8F00D2483048F003AE42D /* FOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF8F00B2483048F003AE42D /* FOverviewViewController.swift */; };
 		9DF8F00E2483048F003AE42D /* FOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF8F00B2483048F003AE42D /* FOverviewViewController.swift */; };
@@ -97,6 +97,7 @@
 		9D328D1923662937003768CF /* TextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
 		9D328D1B2366593C003768CF /* TitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionViewCell.swift; sourceTree = "<group>"; };
 		9D328D1D23665959003768CF /* GenreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreCollectionViewCell.swift; sourceTree = "<group>"; };
+		9D4F21D12495159D00A18902 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9D503BBB237252AE0070F318 /* OverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewViewController.swift; sourceTree = "<group>"; };
 		9D7360E3236513DC00DC6ACB /* Mypresets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mypresets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D7360E6236513DC00DC6ACB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -119,7 +120,6 @@
 		9DF6E6ED23AC8B6300DCB973 /* SleepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepViewController.swift; sourceTree = "<group>"; };
 		9DF6E6EF23AC8B6E00DCB973 /* DepressionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepressionViewController.swift; sourceTree = "<group>"; };
 		9DF6E6F123AC8B8200DCB973 /* TraumaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraumaViewController.swift; sourceTree = "<group>"; };
-		9DF8F0072482DFE7003AE42D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9DF8F00B2483048F003AE42D /* FOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FOverviewViewController.swift; sourceTree = "<group>"; };
 		9DF8F01124875E65003AE42D /* Summer1.dng */ = {isa = PBXFileReference; lastKnownFileType = file; name = Summer1.dng; path = Assets.xcassets/Summer1.dng.dataset/Summer1.dng; sourceTree = "<group>"; };
 		9DF8F013248B06A1003AE42D /* FTodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTodayViewController.swift; sourceTree = "<group>"; };
@@ -228,7 +228,7 @@
 				9D0663AC2367B3A900385DEE /* Genre.swift */,
 				9D0663AD2367B3A900385DEE /* PaywallConfigurationVariant.swift */,
 				9D0663AE2367B3A900385DEE /* Summary.swift */,
-				9DF8F0072482DFE7003AE42D /* GoogleService-Info.plist */,
+				9D4F21D12495159D00A18902 /* GoogleService-Info.plist */,
 				9D328D0C2365EF72003768CF /* BasisGrotesquePro-Bold.ttf */,
 				9D328D0D2365EF72003768CF /* BasisGrotesquePro-Light.ttf */,
 				9D328D0B2365EF72003768CF /* BasisGrotesquePro-Regular.ttf */,
@@ -383,11 +383,11 @@
 			files = (
 				9D7360F3236513DE00DC6ACB /* LaunchScreen.storyboard in Resources */,
 				9D328D0A23651B26003768CF /* Main.storyboard in Resources */,
-				9DF8F0082482DFE8003AE42D /* GoogleService-Info.plist in Resources */,
 				9D328D0E2365EF72003768CF /* BasisGrotesquePro-Regular.ttf in Resources */,
 				9D7360F0236513DE00DC6ACB /* Preview Assets.xcassets in Resources */,
 				9D328D0F2365EF72003768CF /* BasisGrotesquePro-Bold.ttf in Resources */,
 				9DF8F01224875E65003AE42D /* Summer1.dng in Resources */,
+				9D4F21D22495159D00A18902 /* GoogleService-Info.plist in Resources */,
 				9D7360ED236513DE00DC6ACB /* Assets.xcassets in Resources */,
 				9D328D102365EF72003768CF /* BasisGrotesquePro-Light.ttf in Resources */,
 			);
@@ -397,7 +397,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DF8F0092482DFE8003AE42D /* GoogleService-Info.plist in Resources */,
+				9D4F21D32495159D00A18902 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,7 +405,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DF8F00A2482DFE8003AE42D /* GoogleService-Info.plist in Resources */,
+				9D4F21D42495159D00A18902 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -733,7 +733,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.7.4;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aatech.beautyplan;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aatech.mypresets;
 				PRODUCT_NAME = Mypresets;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -759,7 +759,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.7.4;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aatech.beautyplan;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aatech.mypresets;
 				PRODUCT_NAME = Mypresets;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
