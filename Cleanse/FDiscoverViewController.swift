@@ -494,10 +494,29 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
                         
                         let activityViewController = UIActivityViewController(activityItems: shareAll, applicationActivities: nil)
                         
-                        activityViewController.popoverPresentationController?.sourceView = self.view
-                        MBProgressHUD.hide(for: self.view, animated: true)
+//                        activityViewController.popoverPresentationController?.sourceView = self.view
+                        
 
-                        self.present(activityViewController, animated: true, completion: nil)
+//                        self.present(activityViewController, animated: true, completion: nil)
+                        
+                        if UIDevice.current.userInterfaceIdiom == .pad {
+                            // The app is running on an iPad, so you have to wrap it in a UIPopOverController
+                            
+                            activityViewController.modalPresentationStyle = .popover
+                            let screen = UIScreen.main.bounds
+                            
+                            let view: UIView = UIView(frame: CGRect(x: 0, y: Int(screen.height) - 250, width: Int(screen.width), height: 250));
+                            activityViewController.popoverPresentationController?.sourceView = view
+                            MBProgressHUD.hide(for: self.view, animated: true)
+                            
+                            
+                            self.present(activityViewController, animated: true, completion: nil)
+                        } else {
+                            MBProgressHUD.hide(for: self.view, animated: true)
+                            
+                            self.present(activityViewController, animated: true, completion: nil)
+                            
+                        }
                     }
                     
                 }
@@ -742,7 +761,7 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
             logUsePressed(referrer: referrer)
             
             
-            if didpurchase {
+          if didpurchase {
                 
                 
                 var path = String()
@@ -760,7 +779,7 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
 
             } else {
                 self.performSegue(withIdentifier: "FDiscoverToSale", sender: self)
-                
+
             }
             
         }
