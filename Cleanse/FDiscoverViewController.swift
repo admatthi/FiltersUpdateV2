@@ -27,9 +27,10 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
     var books: [Book] = [] {
         didSet {
             
-            self.titleCollectionView.reloadData()
-            MBProgressHUD.hide(for: view, animated: true)
+            titleCollectionView.alpha = 1
 
+            self.titleCollectionView.reloadData()
+            
             
         }
     }
@@ -44,10 +45,14 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
         if didpurchase {
             
             tapHow.alpha = 1
+            
         } else {
             
             tapHow.alpha = 0
         }
+        
+        MBProgressHUD.hide(for: view, animated: true)
+
         
     }
     @IBAction func taphow(_ sender: Any) {
@@ -242,13 +247,17 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
 
         genres.removeAll()
         genres.append("Most Popular")
-        genres.append("New")
+        genres.append("Renee")
+        genres.append("Jay")
+        genres.append("Alexis")
+        genres.append("Sam")
+        genres.append("Tammy")
+        genres.append("Lorena")
         genres.append("Natural")
-        genres.append("Vivid")
-        genres.append("Bright")
-        genres.append("High Contrast")
+        genres.append("Summer")
+        genres.append("Winter")
         genres.append("Detail")
-        genres.append("Matte")
+        
 
 //        genres.append("Travel")
 //        genres.append("Vintage")
@@ -341,7 +350,7 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        layout.itemSize = CGSize(width: screenWidth/1.1, height: screenWidth)
+        layout.itemSize = CGSize(width: screenWidth/1.1, height: screenWidth/0.7)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         
@@ -579,7 +588,7 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
         
         
         
-        ref?.child("AllBooks1").child(selectedgenre).observeSingleEvent(of: .value, with: { (snapshot) in
+        ref?.child("fb-ads-filter").child(selectedgenre).observeSingleEvent(of: .value, with: { (snapshot) in
             
             var value = snapshot.value as? NSDictionary
             
@@ -698,6 +707,10 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
             
             genreCollectionView.scrollToItem(at: indexPath, at: UICollectionView.ScrollPosition.centeredHorizontally, animated: true)
             
+            let myIndexPath = IndexPath(row: 0, section: 0)
+
+            titleCollectionView.scrollToItem(at: myIndexPath, at: UICollectionView.ScrollPosition.top, animated: false)
+
             collectionView.alpha = 0
             
             selectedgenre = genres[indexPath.row]
@@ -711,7 +724,6 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
             
             logCategoryPressed(referrer: referrer)
             
-                        titleCollectionView.scrollToItem(at: indexPath, at: .top, animated: false)
 //            addstaticbooks()
             
             let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
@@ -725,13 +737,14 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
             //print("CELL ITEM===>", book ?? [])
             
             let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
+            referrer = "Discover"
 
             
             headlines.removeAll()
             
             bookindex = indexPath.row
             selectedauthorname = book?.author ?? ""
-            selectedtitle = book?.inspiredby ?? ""
+            selectedtitle = book?.name ?? ""
             selectedurl = book?.audioURL ?? ""
             selectedbookid = book?.bookID ?? ""
             selectedgenre = book?.genre ?? ""
@@ -743,7 +756,7 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
             selectedauthorimage = book?.authorImage ?? ""
             selectedbackground = book?.imageURL ?? ""
             selectedbeforeimage = book?.before ?? ""
-            selectedafterimage = book?.after ?? ""
+            selectedafterimage = book?.imageURL ?? ""
             selecteddownload = book?.download ?? ""
             
             headlines.append(book?.headline1 ?? "x")
@@ -774,9 +787,10 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
                 let file = NSURL(string: selecteddownload);
                 
                 downloadImage(from:file! as URL)
-                
-                ref?.child(uid).child("Favorites").child(selectedbookid).updateChildValues(["Inspired":selectedtitle, "Download" : selecteddownload, "After" : selectedafterimage])
+            
+            ref?.child(uid).child("Favorites").child(selectedbookid).updateChildValues(["filter_name": selectedtitle, "download_image_url" : selecteddownload, "image_url" : selectedafterimage])
 
+                
             } else {
                 self.performSegue(withIdentifier: "FDiscoverToSale", sender: self)
 
@@ -871,8 +885,7 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
             //            cell.selectedimage.layer.masksToBounds = true
             
             
-            
-            
+
             genreCollectionView.alpha = 1
             
             if selectedindex == 0 {
@@ -1207,36 +1220,45 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
             //
             //            } else {
             
-            MBProgressHUD.hide(for: view, animated: true)
-
             
-            let name = book?.inspiredby
-            
-            if (name?.contains(":"))! {
+            if indexPath.row == 0 {
                 
-                var namestring = name?.components(separatedBy: ":")
-                
-                cell.titlelabel.text = namestring![0]
+                cell.leadinglabel.alpha = 1
                 
             } else {
+                cell.leadinglabel.alpha = 0
+                
+            }
+            
+            cell.beforeimge.alpha = 0
+
+
+//                            cell.taphold.tag = indexPath.row
+//
+//                            cell.taphold.addTarget(self, action: #selector(DiscoverViewController.tapWishlist), for: .touchUpInside)
+//
+            let name = book?.name
+            
+          
                 
                 cell.titlelabel.text = name
                 
-            }
+
             
             //                    cell.tapup.tag = indexPath.row
             //
             //                    cell.tapup.addTarget(self, action: #selector(DiscoverViewController.tapWishlist), for: .touchUpInside)
             
-            if let imageURLString = book?.after, let imageUrl = URL(string: imageURLString) {
+            if let imageURLString = book?.imageURL, let imageUrl = URL(string: imageURLString) {
                 
                 cell.titleImage.kf.setImage(with: imageUrl)
+                MBProgressHUD.hide(for: view, animated: true)
+
                 
                 
-                
-                cell.titleImage.layer.cornerRadius = 10.0
-                cell.titleImage.clipsToBounds = true
-                cell.titleImage.alpha = 1
+//                cell.titleImage.layer.cornerRadius = 10.0
+//                cell.titleImage.clipsToBounds = true
+//                cell.titleImage.alpha = 1
                 
                 
                 
@@ -1250,15 +1272,20 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
                 
             }
             
-            let isWished = Bool()
+//
+                   if let imageURLString2 = book?.before, let imageUrl2 = URL(string: imageURLString2) {
             
-            if wishlistids.contains(book!.bookID) {
-                
-                
-            } else {
-                
-            }
+                                     cell.beforeimge.kf.setImage(with: imageUrl2)
             
+            
+            //
+            //                         cell.titleImage.layer.cornerRadius = 10.0
+            //                         cell.titleImage.clipsToBounds = true
+            //                         cell.titleImage.alpha = 1
+            
+                        }
+            
+        
             cell.layer.cornerRadius = 10.0
             cell.layer.masksToBounds = true
             
@@ -1267,12 +1294,20 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
             
             if book?.views != nil {
                 
+                
+                
                 cell.viewslabel.text = book?.views
                 
                 
             } else {
                 
-                cell.viewslabel.text = "1.3M uses"
+                var randomInt = Int.random(in:100..<900)
+
+                
+                ref?.child("fb-ads-filter").child(selectedgenre).child(book!.bookID).updateChildValues(["Views" : "\(randomInt)k"])
+
+                
+//                cell.viewslabel.text = "1.3M"
                 
             }
             
@@ -1298,10 +1333,11 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
     
     @objc func tapWishlist(sender: UIButton) {
         
-        let generator = UIImpactFeedbackGenerator(style: .heavy)
-        generator.impactOccurred()
+   
         
         let book = self.book(atIndex: sender.tag)
+        
+        
         let author = book?.author
         let name = book?.name
         let imageURL = book?.imageURL
@@ -1331,6 +1367,8 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
         }
         
     }
+    
+  
     
     func logUsePressed(referrer : String) {
           AppEvents.logEvent(AppEvents.Name(rawValue: "use pressed"), parameters: ["referrer" : referrer, "bookID" : selectedbookid, "genre" : selectedgenre])

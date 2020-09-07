@@ -13,13 +13,34 @@ import FirebaseDatabase
 import FirebaseStorage
 import Purchases
 import FBSDKCoreKit
+import AppsFlyerLib
 
 var entereddiscount = String()
 
 var actualdiscount = String()
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, AppsFlyerTrackerDelegate {
+    func onConversionDataSuccess(_ conversionInfo: [AnyHashable : Any]) {
+        
+        
+    }
+    
+    
+      func onConversionDataFail(_ error: Error) {
+         print("\(error)")
+     }
+     // Handle Deeplink
+     func onAppOpenAttribution(_ attributionData: [AnyHashable: Any]) {
+         //Handle Deep Link Data
+         print("onAppOpenAttribution data:")
+         for (key, value) in attributionData {
+             print(key, ":",value)
+         }
+     }
+     func onAppOpenAttributionFailure(_ error: Error) {
+         print("\(error)")
+     }
 
     var window: UIWindow?
 
@@ -31,7 +52,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         AppEvents.activateApp()
 
-        refer = "On Open"
+        referrer = "On Open"
+    
+        AppsFlyerTracker.shared().appsFlyerDevKey = "GSfLvX3FDxH58hR3yDZzZe"
+        AppsFlyerTracker.shared().appleAppID = "1520062033"
+        AppsFlyerTracker.shared().delegate = self
+        AppsFlyerTracker.shared().isDebug = true
+
+
+         // 2 - Replace 'appsFlyerDevKey', `appleAppID` with your DevKey, Apple App ID
+    
+        
 //
 //        let mainStoryboardIpad : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
 //        let tabBarBuyer : UITabBarController = mainStoryboardIpad.instantiateViewController(withIdentifier: "HomeTab") as! UITabBarController
@@ -104,6 +135,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        
+        AppsFlyerTracker.shared().trackAppLaunch()
+
+    }
+    
     
 
     // MARK: UISceneSession Lifecycle
@@ -112,9 +149,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
-
-
-
 
 
 

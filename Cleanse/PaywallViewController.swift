@@ -11,6 +11,8 @@ import Firebase
 import Purchases
 import FBSDKCoreKit
 import MBProgressHUD
+import AppsFlyerLib
+
 var refer = String()
 
 var onboarding = Bool()
@@ -38,6 +40,13 @@ var delegate : SwiftPaywallDelegate?
     
     @IBAction func tapRestore(_ sender: Any) {
         
+        
+
+          ref?.child("Users").child(uid).updateChildValues(["Purchased" : "True"])
+          
+          didpurchase = true
+        
+        
         Purchases.shared.restoreTransactions { (purchaserInfo, error) in
             //... check purchaserInfo to see if entitlement is now active
             
@@ -63,8 +72,7 @@ var delegate : SwiftPaywallDelegate?
     @IBAction func tapBack(_ sender: Any) {
         
   
-            
-
+        referrer = "Paywall"
             
             self.dismiss(animated: true, completion: nil)
 
@@ -84,9 +92,19 @@ var delegate : SwiftPaywallDelegate?
 
 
     @IBOutlet weak var backimage: UIImageView!
+    
+    
     @IBAction func tapContinue(_ sender: Any) {
         
+        referrer = "Paywall"
+        
         logTapSubscribeEvent(referrer : referrer)
+        
+        AppsFlyerTracker.shared().trackEvent(AFEventInitiatedCheckout, withValues: [
+              AFEventParamContentId: referrer,
+            
+          ]);
+
         
         let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
 
@@ -124,6 +142,12 @@ var delegate : SwiftPaywallDelegate?
                           
                           didpurchase = true
                         
+                        
+                              AppsFlyerTracker.shared().trackEvent(AFEventStartTrial, withValues: [
+                                    AFEventParamContentId: referrer,
+                                  
+                                ]);
+                        
                         MBProgressHUD.hide(for: self.view, animated: true)
 
                         
@@ -140,6 +164,11 @@ var delegate : SwiftPaywallDelegate?
                           
                         MBProgressHUD.hide(for: self.view, animated: true)
 
+
+                        AppsFlyerTracker.shared().trackEvent(AFEventStartTrial, withValues: [
+                              AFEventParamContentId: referrer,
+                            
+                          ]);
                           didpurchase = true
                         
                                    
@@ -202,6 +231,7 @@ var delegate : SwiftPaywallDelegate?
  
         // Do any additional setup after loading the view.
     }
+    @IBOutlet weak var toptext: UILabel!
     
     @IBOutlet weak var value1: UILabel!
     func queryforpaywall() {
@@ -218,18 +248,21 @@ var delegate : SwiftPaywallDelegate?
 //
                 self.leadingtext.text = slimey
 
-//                self.termstext.alpha = 0
-//                        self.disclaimertext.alpha = 0
-//                         self.tapcontinue.setTitle("Try for FREE!", for: .normal)
+                self.toptext.text = "3 Day FREE Trial"
+                self.termstext.alpha = 0
+                        self.disclaimertext.alpha = 0
+                         self.tapcontinue.setTitle("Try for FREE!", for: .normal)
                 
             } else {
 //
 //                slimeybool = false
-                self.leadingtext.text = "$19.99/year"
+                self.leadingtext.text = "$69.99/year"
+                
+                self.toptext.text = "World Class Presets"
 //
-//                self.termstext.alpha = 1
-//                  self.disclaimertext.alpha = 1
-//                  self.tapcontinue.setTitle("Continue", for: .normal)
+                self.termstext.alpha = 1
+                  self.disclaimertext.alpha = 1
+                  self.tapcontinue.setTitle("Continue", for: .normal)
                 self.tapcontinue.setTitle("Continue", for: .normal)
                 
 

@@ -56,6 +56,7 @@ class FFavoritesViewController: UIViewController, UICollectionViewDataSource, UI
 
 
                         }
+                        
 
                         tapbuton.alpha = 0.25
 
@@ -253,7 +254,7 @@ class FFavoritesViewController: UIViewController, UICollectionViewDataSource, UI
 
                     let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
                     layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-                layout.itemSize = CGSize(width: screenWidth/1.1, height: screenWidth)
+                layout.itemSize = CGSize(width: screenWidth/1.1, height: screenWidth/0.7)
                     layout.minimumInteritemSpacing = 0
                     layout.minimumLineSpacing = 0
 
@@ -883,87 +884,83 @@ class FFavoritesViewController: UIViewController, UICollectionViewDataSource, UI
                         return cell
 
                     case self.titleCollectionView:
-                        let book = self.book(atIndexPath: indexPath)
-                        titleCollectionView.alpha = 1
-                        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Books", for: indexPath) as! TitleCollectionViewCell
-                        //
-                        //            if book?.bookID == "Title" {
-                        //
-                        //                return cell
-                        //
-                        //            } else {
+                     let book = self.book(atIndexPath: indexPath)
+                                  titleCollectionView.alpha = 1
+                                  let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Books", for: indexPath) as! TitleCollectionViewCell
+                                  //
+                                  //            if book?.bookID == "Title" {
+                                  //
+                                  //                return cell
+                                  //
+                                  //            } else {
+                                  
+                                  MBProgressHUD.hide(for: view, animated: true)
 
-                        
-                    
-                        let name = book?.inspiredby
-
-                        if (name?.contains(":"))! {
-
-                            var namestring = name?.components(separatedBy: ":")
-
-                            cell.titlelabel.text = namestring![0]
-
-                        } else {
-
-                            cell.titlelabel.text = name
-
-                        }
-
-    //                    cell.tapup.tag = indexPath.row
-    //
-    //                    cell.tapup.addTarget(self, action: #selector(DiscoverViewController.tapWishlist), for: .touchUpInside)
-
-                        if let imageURLString = book?.after, let imageUrl = URL(string: imageURLString) {
-
-                            cell.titleImage.kf.setImage(with: imageUrl)
-
-
-
-                            cell.titleImage.layer.cornerRadius = 10.0
-                            cell.titleImage.clipsToBounds = true
-                            cell.titleImage.alpha = 1
-
-                          
-                            
-                            
-        //                    let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-        //                    let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        //                    blurEffectView.frame = cell.titleback.bounds
-        //                    blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        //                    cell.titleback.addSubview(blurEffectView)
-
-
-                        }
-
-                        let isWished = Bool()
-
-                        if wishlistids.contains(book!.bookID) {
-
-
-                        } else {
-
-                        }
-
-                        cell.layer.cornerRadius = 10.0
-                        cell.layer.masksToBounds = true
-
-                        cell.titlelabel.alpha = 1
-                        cell.titlelabel.alpha = 1
-
-                        if book?.views != nil {
+                                  
+                                  let name = book?.name
+                                  
+                             
+                                      
+                                cell.titlelabel.text = name
+                                      
+                                
+                                  
+                                  //                    cell.tapup.tag = indexPath.row
+                                  //
+                                  //                    cell.tapup.addTarget(self, action: #selector(DiscoverViewController.tapWishlist), for: .touchUpInside)
+                                  
+                                  if let imageURLString = book?.imageURL, let imageUrl = URL(string: imageURLString) {
+                                      
+                                      cell.titleImage.kf.setImage(with: imageUrl)
+                                      
+                                      
+                                      
+                                      cell.titleImage.layer.cornerRadius = 10.0
+                                      cell.titleImage.clipsToBounds = true
+                                      cell.titleImage.alpha = 1
+                                      
+                                      
+                                      
+                                      
+                                      //                    let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+                                      //                    let blurEffectView = UIVisualEffectView(effect: blurEffect)
+                                      //                    blurEffectView.frame = cell.titleback.bounds
+                                      //                    blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                                      //                    cell.titleback.addSubview(blurEffectView)
+                                      
+                                      
+                                  }
+                                  
+                                  let isWished = Bool()
+                                  
+                                  if wishlistids.contains(book!.bookID) {
+                                      
+                                      
+                                  } else {
+                                      
+                                  }
+                                  
+                                  cell.layer.cornerRadius = 10.0
+                                  cell.layer.masksToBounds = true
+                                  
+                                  cell.titlelabel.alpha = 1
+                                  cell.titlelabel.alpha = 1
+                                  
+                                  if book?.views != nil {
                                       
                                       cell.viewslabel.text = book?.views
-
+                                      
                                       
                                   } else {
                                       
                                       cell.viewslabel.text = "1.3M uses"
-
+                                      
                                   }
-                     
-
-                  
-                        return cell
+                                  
+                                  
+                                  
+                                  
+                                  return cell
 
                         //            }
 
