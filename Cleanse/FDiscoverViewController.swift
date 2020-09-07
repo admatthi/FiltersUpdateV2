@@ -587,7 +587,6 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
         var functioncounter = 0
         
         
-        
         ref?.child("fb-ads-filter").child(selectedgenre).observeSingleEvent(of: .value, with: { (snapshot) in
             
             var value = snapshot.value as? NSDictionary
@@ -1251,8 +1250,33 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
             
             if let imageURLString = book?.imageURL, let imageUrl = URL(string: imageURLString) {
                 
-                cell.titleImage.kf.setImage(with: imageUrl)
+                let task = URLSession.shared.dataTask(with: imageUrl) { data, response, error in
+                        guard let data = data, error == nil else { return }
+
+                        /**CHECK 404 HERE*/
+                        if let httpResponse = response as? HTTPURLResponse {
+                            if httpResponse.statusCode == 400 {
+                                //YOUR CODE HERE
+                            return
+                            }
+                        }
+
+
+                        DispatchQueue.main.async() {    // execute on main thread
+                           // self.imageShow.image = UIImage(data: data)
+//
+                            cell.titleImage.image = UIImage(data: data);
+                            
+                        }
+                    }
+
+                task.resume()
+                
                 MBProgressHUD.hide(for: view, animated: true)
+
+                
+                
+                
 
                 
                 
