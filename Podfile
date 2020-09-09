@@ -17,6 +17,8 @@ pod 'FBSDKCoreKit'
 pod 'Firebase/Messaging'
 pod 'AppsFlyerFramework'
 pod 'MBProgressHUD'
+pod 'Alamofire'
+pod 'AlamofireImage'
 
   target 'CleanseTests' do
     inherit! :search_paths

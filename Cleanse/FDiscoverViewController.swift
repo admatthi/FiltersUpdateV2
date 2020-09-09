@@ -15,6 +15,8 @@ import Kingfisher
 import Photos
 import MBProgressHUD
 import FBSDKCoreKit
+import Alamofire
+import AlamofireImage
 
 var selectedbeforeimage = String()
 var selectedafterimage = String()
@@ -1234,7 +1236,9 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
             
             if let imageURLString = book?.imageURL, let imageUrl = URL(string: imageURLString) {
                       
-                      cell.titleImage.kf.setImage(with: imageUrl)
+                      //cell.titleImage.kf.setImage(with: imageUrl)
+                cell.titleImage.af.setImage(withURL: imageUrl)
+
                       MBProgressHUD.hide(for: view, animated: true)
 
                      
