@@ -1233,35 +1233,14 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
             //                    cell.tapup.addTarget(self, action: #selector(DiscoverViewController.tapWishlist), for: .touchUpInside)
             
             if let imageURLString = book?.imageURL, let imageUrl = URL(string: imageURLString) {
-                
-                let task = URLSession.shared.dataTask(with: imageUrl) { data, response, error in
-                        guard let data = data, error == nil else { return }
+                      
+                      cell.titleImage.kf.setImage(with: imageUrl)
+                      MBProgressHUD.hide(for: view, animated: true)
 
-                        /**CHECK 404 HERE*/
-                        if let httpResponse = response as? HTTPURLResponse {
-                            if httpResponse.statusCode == 400 {
-                                //YOUR CODE HERE
-                            return
-                            }
-                        }
-
-
-                        DispatchQueue.main.async() {    // execute on main thread
-                           // self.imageShow.image = UIImage(data: data)
-//
-                            cell.titleImage.image = UIImage(data: data);
-                            
-                        }
-                    }
-
-                task.resume()
-                
-                MBProgressHUD.hide(for: view, animated: true)
-
-               
-                
-                
-            }
+                     
+                      
+                      
+                  }
             
 //
                    if let imageURLString2 = book?.before, let imageUrl2 = URL(string: imageURLString2) {
