@@ -605,23 +605,7 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
                     self.books = self.books.sorted(by: { $0.popularity ?? 0  > $1.popularity ?? 0 })
                     
                 }
-                
-                //                                for each in snapDict {
-                //
-                //                                    functioncounter += 1
-                //
-                //                                    let ids = each.key
-                //
-                //                                    seemoreids.append(ids)
-                //
-                //
-                //                                    if functioncounter == snapDict.count {
-                //
-                //                                        self.updateaudiostructure()
-                //
-                //                                    }
-                //                                }
-                
+       
             }
             
         })
@@ -1254,20 +1238,7 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
                 cell.titleImage.kf.setImage(with: imageUrl)
                 MBProgressHUD.hide(for: view, animated: true)
 
-                
-                
-//                cell.titleImage.layer.cornerRadius = 10.0
-//                cell.titleImage.clipsToBounds = true
-//                cell.titleImage.alpha = 1
-                
-                
-                
-                
-                //                    let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-                //                    let blurEffectView = UIVisualEffectView(effect: blurEffect)
-                //                    blurEffectView.frame = cell.titleback.bounds
-                //                    blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                //                    cell.titleback.addSubview(blurEffectView)
+               
                 
                 
             }
@@ -1276,13 +1247,7 @@ class FDiscoverViewController: UIViewController, UICollectionViewDelegate, UICol
                    if let imageURLString2 = book?.before, let imageUrl2 = URL(string: imageURLString2) {
             
                                      cell.beforeimge.kf.setImage(with: imageUrl2)
-            
-            
-            //
-            //                         cell.titleImage.layer.cornerRadius = 10.0
-            //                         cell.titleImage.clipsToBounds = true
-            //                         cell.titleImage.alpha = 1
-            
+    
                         }
             
         
